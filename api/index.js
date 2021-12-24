@@ -21,11 +21,18 @@ const app = express();
 dotenv.config();
 
 // Connect to DB
-mongoose.connect(
-    process.env.MONGO_URL,
-    { useNewUrlParser: true, useUnifiedTopology: true},
-    () => console.log("Connected to Mongo")
-);
+(async function() {
+    try {
+        await mongoose.connect(
+            process.env.MONGO_URL,
+            { useNewUrlParser: true, useUnifiedTopology: true},
+            () => console.log("Connected to Mongo")
+        );
+    } catch (error) {
+        console.log('Connction error', error)
+    }
+}())
+
 
 //middlewares
 app.use(express.json());
