@@ -1,4 +1,5 @@
 // Components
+import Post from '../post/Post'
 import Share from '../share/Share'
 
 // Styles
@@ -9,6 +10,7 @@ export default function Feed() {
         <div className="feed">
             <div className="feed_wrapper">
                 <Share />
+                <Post />
             </div>
         </div>
     )
