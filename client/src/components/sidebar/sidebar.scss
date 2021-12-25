@@ -1,0 +1,49 @@
+.sidebar {
+    flex: 3;
+    height: calc(100vh - 50px);
+    overflow-y: scroll;
+    &_wrapper {
+        padding: 20px;
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            &_item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px; 
+                cursor: pointer;
+                .icon {
+                    margin-right: 10px;
+                }
+            }
+        }
+        .sidebar-button {
+            width: 150px;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+        .sidebar-divider {
+            margin: 20px 0;
+        }
+        .sidebar-friends-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            &_item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                .image {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
