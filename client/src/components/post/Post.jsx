@@ -1,56 +1,59 @@
-import {useState} from 'react'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import {format} from "timeago.js";
+import { Link } from "react-router-dom";
 // Icons
 import { MoreVert } from "@material-ui/icons";
-
-// Dummy data
-import {Users} from '../../data/data.js'
 
 // Styles
 import "./post.scss";
 
-export default function Post({post}) {
-  const [like, setLike] = useState(post.like)
-  const [isLiked, setIsLiked] = useState(false)
-  const findUser = () => {
-    const user = Users.filter(user => user.id === post?.userId)
-    return {
-      name: user[0].username,
-      image: user[0].profilePicture
-    }
-  }
-  const PF = process.env.REACT_APP_PUBLIC_URL
+export default function Post({ post }) {
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`/users?userId=${post.userId}`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
+
+  const PF = process.env.REACT_APP_PUBLIC_URL;
   const likeHandler = () => {
-    setLike(isLiked ? like-1 : like+1)
-    setIsLiked(!isLiked)
-  }
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
   return (
     <div className="post">
       <div className="post_wrapper">
         <div className="post_wrapper__top">
           <div className="left">
-            <img src={PF+findUser().image} alt="" />
-            <span className="name">{findUser().name}</span>
-            <span className="date">{post?.date}</span>
+            <Link to={`profile/${user.username}`}>
+              <img src={user.profilePicture || PF+'person/no-avatar-1.jpeg'} alt="" />
+            </Link>
+            <span className="name">{user.username}</span>
+            <span className="date">{format(post.createdAt, 'en_US')}</span>
           </div>
           <div className="right">
             <MoreVert />
           </div>
         </div>
         <div className="post_wrapper__center">
-            <span className="description">
-                {post?.desc}
-            </span>
-            <img src={PF+post?.photo} alt="" />
+          <span className="description">{post?.description}</span>
+          {post.image && <img src={PF + post?.image} alt="" />}
         </div>
         <div className="post_wrapper__bottom">
-            <div className="left">
-                <img src={`${PF}like.png`} alt="" onClick={likeHandler} />
-                <img src={`${PF}heart.png`} alt="" onClick={likeHandler} />
-                <span className="counter">{like} people liked it</span>
-            </div>
-            <div className="right">
-                <span className="comments">{post.comment} comment</span>
-            </div>
+          <div className="left">
+            <img src={`${PF}like.png`} alt="" onClick={likeHandler} />
+            <img src={`${PF}heart.png`} alt="" onClick={likeHandler} />
+            <span className="counter">{like} people liked it</span>
+          </div>
+          <div className="right">
+            <span className="comments">{post.comment} comment</span>
+          </div>
         </div>
       </div>
     </div>

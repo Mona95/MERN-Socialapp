@@ -44,11 +44,6 @@ export const Users = [
       profilePicture: "person/9.jpeg",
       username: "Gary Duty",
     },
-    {
-      id:10,
-      profilePicture: "person/10.jpeg",
-      username: "Safak Kocaoglu",
-    },
   ];
   
   export const Posts = [
@@ -127,13 +122,5 @@ export const Users = [
       userId: 9,
       like: 11,
       comment: 2,
-    },
-    {
-      id: 10,
-      photo: "post/10.jpeg",
-      date: "1 week ago",
-      userId: 10,
-      like: 104,
-      comment: 12,
-    },
+    }
   ];

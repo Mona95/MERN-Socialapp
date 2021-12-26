@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+
+//Icons
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 
 // Styles
@@ -7,7 +10,9 @@ export default function Topbar() {
   return (
     <div className="topbar-container">
       <div className="topbar-container_left">
-        <span className="logo">Social App</span>
+        <Link to="/" style={{textDecoration: "none"}}>
+          <span className="logo">Social App</span>
+        </Link>
       </div>
       <div className="topbar-container_center">
         <div className="searchbar">

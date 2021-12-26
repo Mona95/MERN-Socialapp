@@ -6,7 +6,7 @@ import { Users } from "../../data/data.js";
 // Styles
 import "./rightbar.scss";
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_URL;
   // Inner component HomeRightbar
   const HomeRightbar = () => {
@@ -31,48 +31,54 @@ export default function Rightbar({ profile }) {
   // Inner component ProfileRightbar
   const ProfileRightbar = () => {
     return (
-        <>
-            <h4 className="title">User Information</h4>
-            <div className="info">
-                <div className="info_item">
-                    <span className="info_item__key">City:</span>
-                    <span className="info_item__value">Antalya</span>
-                </div>
-                <div className="info_item">
-                    <span className="info_item__key">From:</span>
-                    <span className="info_item__value">Iran</span>
-                </div>
-                <div className="info_item">
-                    <span className="info_item__key">Relationship:</span>
-                    <span className="info_item__value">Married</span>
-                </div>
-            </div>
-            <h4 className="title">Followings</h4>
-            <div className="followings">
-                <div className="following">
-                    <img src={`${PF}person/2.jpeg`} alt="" />
-                    <span className="name">John Carter</span>
-                </div>
-                <div className="following">
-                    <img src={`${PF}person/3.jpeg`} alt="" />
-                    <span className="name">John Carter</span>
-                </div>
-                <div className="following">
-                    <img src={`${PF}person/4.jpeg`} alt="" />
-                    <span className="name">John Carter</span>
-                </div>
-                <div className="following">
-                    <img src={`${PF}person/1.jpeg`} alt="" />
-                    <span className="name">John Carter</span>
-                </div>
-            </div>
-        </>
-    )
+      <>
+        <h4 className="title">User Information</h4>
+        <div className="info">
+          <div className="info_item">
+            <span className="info_item__key">City:</span>
+            <span className="info_item__value">{user.city}</span>
+          </div>
+          <div className="info_item">
+            <span className="info_item__key">From:</span>
+            <span className="info_item__value">{user.from}</span>
+          </div>
+          <div className="info_item">
+            <span className="info_item__key">Relationship:</span>
+            <span className="info_item__value">
+              {user.relationship === 1
+                ? "Single"
+                : user.relations === 2
+                ? "Married"
+                : "-"}
+            </span>
+          </div>
+        </div>
+        <h4 className="title">Followings</h4>
+        <div className="followings">
+          <div className="following">
+            <img src={`${PF}person/2.jpeg`} alt="" />
+            <span className="name">John Carter</span>
+          </div>
+          <div className="following">
+            <img src={`${PF}person/3.jpeg`} alt="" />
+            <span className="name">John Carter</span>
+          </div>
+          <div className="following">
+            <img src={`${PF}person/4.jpeg`} alt="" />
+            <span className="name">John Carter</span>
+          </div>
+          <div className="following">
+            <img src={`${PF}person/1.jpeg`} alt="" />
+            <span className="name">John Carter</span>
+          </div>
+        </div>
+      </>
+    );
   };
   return (
     <div className="rightbar">
       <div className="rightbar_wrapper">
-        {profile ? <ProfileRightbar /> : <HomeRightbar />}
+        {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
     </div>
   );
