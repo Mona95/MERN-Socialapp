@@ -7,6 +7,7 @@ import { Users } from "../../data/data.js";
 import "./rightbar.scss";
 
 export default function Rightbar({ profile }) {
+  const PF = process.env.REACT_APP_PUBLIC_URL;
   // Inner component HomeRightbar
   const HomeRightbar = () => {
     return (
@@ -49,19 +50,19 @@ export default function Rightbar({ profile }) {
             <h4 className="title">Followings</h4>
             <div className="followings">
                 <div className="following">
-                    <img src="/assets/person/2.jpeg" alt="" />
+                    <img src={`${PF}person/2.jpeg`} alt="" />
                     <span className="name">John Carter</span>
                 </div>
                 <div className="following">
-                    <img src="/assets/person/3.jpeg" alt="" />
+                    <img src={`${PF}person/3.jpeg`} alt="" />
                     <span className="name">John Carter</span>
                 </div>
                 <div className="following">
-                    <img src="/assets/person/4.jpeg" alt="" />
+                    <img src={`${PF}person/4.jpeg`} alt="" />
                     <span className="name">John Carter</span>
                 </div>
                 <div className="following">
-                    <img src="/assets/person/1.jpeg" alt="" />
+                    <img src={`${PF}person/1.jpeg`} alt="" />
                     <span className="name">John Carter</span>
                 </div>
             </div>

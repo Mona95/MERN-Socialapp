@@ -18,6 +18,7 @@ export default function Post({post}) {
       image: user[0].profilePicture
     }
   }
+  const PF = process.env.REACT_APP_PUBLIC_URL
   const likeHandler = () => {
     setLike(isLiked ? like-1 : like+1)
     setIsLiked(!isLiked)
@@ -27,7 +28,7 @@ export default function Post({post}) {
       <div className="post_wrapper">
         <div className="post_wrapper__top">
           <div className="left">
-            <img src={findUser().image} alt="" />
+            <img src={PF+findUser().image} alt="" />
             <span className="name">{findUser().name}</span>
             <span className="date">{post?.date}</span>
           </div>
@@ -39,12 +40,12 @@ export default function Post({post}) {
             <span className="description">
                 {post?.desc}
             </span>
-            <img src={post?.photo} alt="" />
+            <img src={PF+post?.photo} alt="" />
         </div>
         <div className="post_wrapper__bottom">
             <div className="left">
-                <img src="/assets/like.png" alt="" onClick={likeHandler} />
-                <img src="/assets/heart.png" alt="" onClick={likeHandler} />
+                <img src={`${PF}like.png`} alt="" onClick={likeHandler} />
+                <img src={`${PF}heart.png`} alt="" onClick={likeHandler} />
                 <span className="counter">{like} people liked it</span>
             </div>
             <div className="right">
