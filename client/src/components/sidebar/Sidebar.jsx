@@ -1,3 +1,9 @@
+//Components
+import CloseFriend from "../closeFriend/CloseFriend.jsx";
+
+//Dummy data
+import { Users } from "../../data/data.js";
+
 // Icons 
 import {
     RssFeed,
@@ -59,22 +65,7 @@ export default function Sidebar() {
                 <button className="sidebar-button">Show More</button>
                 <hr className="sidebar-divider" />
                 <ul className="sidebar-friends-list">
-                    <li className="sidebar-friends-list_item">
-                        <img className="image" src="/assets/person/2.jpeg" alt="" />
-                        <span className="name">Jane Doe</span>
-                    </li>
-                    <li className="sidebar-friends-list_item">
-                        <img className="image" src="/assets/person/2.jpeg" alt="" />
-                        <span className="name">Jane Doe</span>
-                    </li>
-                    <li className="sidebar-friends-list_item">
-                        <img className="image" src="/assets/person/2.jpeg" alt="" />
-                        <span className="name">Jane Doe</span>
-                    </li>
-                    <li className="sidebar-friends-list_item">
-                        <img className="image" src="/assets/person/2.jpeg" alt="" />
-                        <span className="name">Jane Doe</span>
-                    </li>
+                    {Users.map(user=> (<CloseFriend key={user.id} user={user} />))}
                 </ul>
             </div>
         </div>

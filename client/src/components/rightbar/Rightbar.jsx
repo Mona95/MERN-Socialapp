@@ -1,3 +1,8 @@
+//Components
+import Online from "../online/Online"
+//Dummy data
+import { Users } from "../../data/data.js";
+
 // Styles
 import './rightbar.scss'
 
@@ -12,34 +17,9 @@ export default function Rightbar() {
                 <img className="ad" src="/assets/ad.png" alt="" />
                 <h4 className="title">Online Friends</h4>
                 <ul className="friends-list">
-                    <li className="friend">
-                        <div className="profile">
-                            <img src="/assets/person/3.jpeg" alt="" />
-                            <span className="online"></span>
-                        </div>
-                        <span className="name">John Carter</span>
-                    </li>
-                    <li className="friend">
-                        <div className="profile">
-                            <img src="/assets/person/3.jpeg" alt="" />
-                            <span className="online"></span>
-                        </div>
-                        <span className="name">John Carter</span>
-                    </li>
-                    <li className="friend">
-                        <div className="profile">
-                            <img src="/assets/person/3.jpeg" alt="" />
-                            <span className="online"></span>
-                        </div>
-                        <span className="name">John Carter</span>
-                    </li>
-                    <li className="friend">
-                        <div className="profile">
-                            <img src="/assets/person/3.jpeg" alt="" />
-                            <span className="online"></span>
-                        </div>
-                        <span className="name">John Carter</span>
-                    </li>
+                    {Users.map(user=> (
+                        <Online key={user.id} user={user} />
+                    ))}
                 </ul>
             </div>
         </div>
