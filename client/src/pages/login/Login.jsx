@@ -1,4 +1,7 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext"
+import { loginCall } from "../../apiCalls"
+
 // Styles
 import "./login.scss";
 
@@ -6,10 +9,12 @@ export default function Login() {
   const email = useRef();
   const password = useRef();
 
+  const {isFetching, error, dispatch} = useContext(AuthContext)
+  console.log(isFetching)
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
-    console.log(password.current.value);
+    loginCall({email: email.current.value, password: password.current.value}, dispatch)
   };
   return (
     <div className="login">
@@ -37,7 +42,7 @@ export default function Login() {
               placeholder="Password"
               className="login-input"
             />
-            <button className="login-button">Log In</button>
+            <button className="login-button">{isFetching ? "Loading..." : "Log In"}</button>
             <span className="login-forgot">Forgot Password?</span>
             <button className="login-register-button">
               Create a New Account
