@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {format} from "timeago.js";
 import { Link } from "react-router-dom";
 // Icons
 import { MoreVert } from "@material-ui/icons";
@@ -35,7 +34,7 @@ export default function Post({ post }) {
               <img src={user.profilePicture || PF+'person/no-avatar-1.jpeg'} alt="" />
             </Link>
             <span className="name">{user.username}</span>
-            <span className="date">{format(post.createdAt, 'en_US')}</span>
+            <span className="date">{post.createdAt}</span>
           </div>
           <div className="right">
             <MoreVert />
