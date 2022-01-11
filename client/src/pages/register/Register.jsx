@@ -1,7 +1,37 @@
+import { useRef } from "react";
+import {useNavigate} from "react-router";
+import axios from "axios"
 // Styles
 import "./register.scss";
 
 export default function Login() {
+  const username = useRef();
+  const email = useRef();
+  const password = useRef();
+  const confirmPassword = useRef();
+
+  const navigate = useNavigate();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    if(password.current.value !== confirmPassword.current.value) {
+      confirmPassword.current.setCustomValidity("Passwords don't match")
+    } else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      }
+      try{
+        await axios.post("/auth/register", user)
+        navigate("/login")
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+  };
+
   return (
     <div className="register">
       <div className="register_wrapper">
@@ -12,14 +42,38 @@ export default function Login() {
           </span>
         </div>
         <div className="register_wrapper__right">
-            <div className="box">
-                <input type="text" placeholder="Username" className="register-input"/>
-                <input type="email" placeholder="Email" className="register-input"/>
-                <input type="password" placeholder="Password" className="register-input"/>
-                <input type="password" placeholder="Confirm Password" className="register-input"/>
-                <button className="register-button">Sign Up</button>
-                <button className="register-login-button">Log into Account</button>
-            </div>
+          <form className="box" onSubmit={handleClick}>
+            <input
+              required
+              type="text"
+              placeholder="Username"
+              ref={username}
+              className="register-input"
+            />
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              ref={email}
+              className="register-input"
+            />
+            <input
+              required
+              type="password"
+              placeholder="Password"
+              ref={password}
+              className="register-input"
+            />
+            <input
+              required
+              type="password"
+              placeholder="Confirm Password"
+              ref={confirmPassword}
+              className="register-input"
+            />
+            <button className="register-button" type="submit">Sign Up</button>
+            <button className="register-login-button">Log into Account</button>
+          </form>
         </div>
       </div>
     </div>

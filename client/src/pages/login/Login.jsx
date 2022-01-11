@@ -1,4 +1,5 @@
 import { useRef, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { loginCall } from "../../apiCalls";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -46,13 +47,13 @@ export default function Login() {
               placeholder="Password"
               className="login-input"
             />
-            <button className="login-button" disabled={isFetching}>
+            <button type="submit" className="login-button" disabled={isFetching}>
               {isFetching ? <CircularProgress color="inherit" /> : "Log In"}
             </button>
             <span className="login-forgot">Forgot Password?</span>
-            <button className="login-register-button">
+            <Link to="/register" className="login-register-button">
               Create a New Account
-            </button>
+            </Link>
           </form>
         </div>
       </div>
