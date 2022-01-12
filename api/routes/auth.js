@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
 
         // send new user and return response
         const user = await newUser.save();
-        res.status(200).json(user);
+        return res.status(200).json(user);
     } catch (error) {
         console.log(error);
     }
@@ -29,15 +29,19 @@ router.post("/login", async (req, res) => {
     try {
         // checking email
         const user = await User.findOne({email: req.body.email})
-        !user && res.status(404).json('user not found')
+        if(!user) {
+            return res.status(404).json('user not found');
+        }
 
         // checking password
         const validPassword = await bcrypt.compare(req.body.password, user.password)
-        !validPassword && res.status(404).json('wrong password')
+        if (!validPassword){
+            return res.status(404).json('wrong password')
+        }
 
         return res.status(200).json(user)
     } catch (error) {
-        res.status(500).json(error)
+        return res.status(500).json(error)
     }
     
 })
