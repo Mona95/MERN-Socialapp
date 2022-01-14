@@ -23,7 +23,7 @@ export default function Profile() {
       setUser(res.data);
     };
     fetchUser();
-  }, []);
+  }, [params.username]);
   return (
     <>
       <Topbar />

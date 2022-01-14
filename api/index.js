@@ -38,7 +38,7 @@ dotenv.config();
 })();
 
 // if url is /image, dont trigger any api, instead go to the images directory
-app.use("/images", express.static(path.join(__dirname, "public/images")))
+app.use("/images/", express.static(path.join(__dirname, "public/images")));
 
 //middlewares
 app.use(express.json());
@@ -50,16 +50,16 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-      cb(null, req.body.name)
-  }
+    cb(null, req.body.name);
+  },
 });
 
-const upload = multer({storage});
+const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
-    return res.status(200).json("File uploaded successfully!");
-  } catch (err) {
-    res.status(500).json(err);
+    return res.status(200).json("File uploded successfully");
+  } catch (error) {
+    console.error(error);
   }
 });
 
