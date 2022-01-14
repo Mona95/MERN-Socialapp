@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import {Link} from "react-router-dom";
 //Components
 import Online from "../online/Online";
 //Dummy data
@@ -7,7 +10,21 @@ import { Users } from "../../data/data.js";
 import "./rightbar.scss";
 
 export default function Rightbar({ user }) {
+  const [friends, setFriends] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_URL;
+
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const friendsList = await axios.get(`/users/friends/${user._id}`);
+        setFriends(friendsList);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    getFriends();
+  }, []);
   // Inner component HomeRightbar
   const HomeRightbar = () => {
     return (
@@ -55,22 +72,22 @@ export default function Rightbar({ user }) {
         </div>
         <h4 className="title">Followings</h4>
         <div className="followings">
-          <div className="following">
-            <img src={`${PF}person/2.jpeg`} alt="" />
-            <span className="name">John Carter</span>
-          </div>
-          <div className="following">
-            <img src={`${PF}person/3.jpeg`} alt="" />
-            <span className="name">John Carter</span>
-          </div>
-          <div className="following">
-            <img src={`${PF}person/4.jpeg`} alt="" />
-            <span className="name">John Carter</span>
-          </div>
-          <div className="following">
-            <img src={`${PF}person/1.jpeg`} alt="" />
-            <span className="name">John Carter</span>
-          </div>
+          {friends.length > 0 &&
+            friends.map((friend) => (
+              <Link to={`/profile/${friend.username}`}>
+                <div className="following">
+                  <img
+                    src={
+                      friend.profilePicture
+                        ? friend.profilePicture
+                        : PF + "person/no-avatar-1.jpeg"
+                    }
+                    alt=""
+                  />
+                  <span className="name">{friend.username}</span>
+                </div>
+              </Link>
+            ))}
         </div>
       </>
     );

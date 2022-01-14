@@ -3,17 +3,7 @@ import AuthReducer from "./AuthReducer"
 
 // initial state
 const INITIAL_STATE = {
-  user: {
-    _id: '61c0050348b1fd9f404508d9',
-    username: "john",
-    email:"john@google.com",
-    profilePicture:"",
-    coverPicture: "",
-    isAdmin: true,
-    followers: [],
-    followings: []
-
-  },
+  user: null,
   isFetching: false,
   error: false,
 };
